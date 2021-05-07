@@ -37,12 +37,12 @@ public class FXMLController {
     	txtResult.clear();
     	try {
     		int numeroCrediti = Integer.parseInt(txtInput.getText());
-    			
+    		
     		long start = System.currentTimeMillis();
     		Set<Esame> voti = model.calcolaSottoinsiemeEsami(numeroCrediti);
     		long end = System.currentTimeMillis();
     		
-    		if(voti == null) {
+    		if(voti.isEmpty()) {
     			txtResult.appendText("Non ho trovato soluzioni\n");
     			return ;
     		}
