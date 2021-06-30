@@ -76,6 +76,7 @@ public class Model {
 		// GENERARE I SOTTO-PROBLEMI
 		
 		/* 1 metodo che però considera e1, e2 ma anche e2,e1.. non li vede uguali
+		 * approccio simile agli anagrammi
 		for (Esame e : this.partenza) {
 			
 			if(!parziale.contains(e)) {
@@ -88,6 +89,7 @@ public class Model {
 		*/
 		
 		/* 2 metodo migliore ma non ci salva da tutti i problemi... aggiungiamo controllo i >= L
+		 * serve perche se siamo al livello 4 della ricorsione non serve controllare di nuovo i primi 3 esami
 		for(int i = 0; i < partenza.size(); i ++) {
 			
 			if(!parziale.contains(partenza.get(i)) && i >= L) {
@@ -100,10 +102,14 @@ public class Model {
 		
 		// 3 metodo migliore che ci evita ripetizioni e fa convergere il problema
 		// NECESSARIO TRASFORMARE I SET IN LISTE PER FARE GET!!!
+		
+		// salviamo l'indice IN PARTENZA dell'ultimo esame messo in parziale -> evitiamo tutti gli esami che vengono prima
 				int lastIndex = 0;
-				if(parziale.size() > 0)
-					lastIndex = this.partenza.indexOf(parziale.get(parziale.size()-1));
+				if(parziale.size() > 0) // se non è vuota
+					lastIndex = this.partenza.indexOf(parziale.get(parziale.size()-1)); // indice dell'ultimo esame contenuto 
+				// in parziale..... indice che si riferisce alla sua posizione in partenza
 				
+				// facciamo ricorsione solo sugli esami che vengono dopo l'ultimo aggiunto
 				for(int i = lastIndex; i< partenza.size(); i ++) {
 					if(!parziale.contains(partenza.get(i))) {
 						parziale.add(partenza.get(i));
